@@ -372,16 +372,15 @@ public class ShadowContextImpl {
     return userId;
   }
 
-  @Implementation
+  @Implementation(minSdk = KITKAT)
   protected File getExternalCacheDir() {
-    return Environment.getExternalStorageDirectory();
+    final File[] dirs = getExternalCacheDirs();
+    return (dirs != null && dirs.length > 0) ? dirs[0] : null;
   }
 
   @Implementation(minSdk = KITKAT)
   protected File[] getExternalCacheDirs() {
-    // Very minimal implementation: return a list of just a single directory: the same one that
-    // getExternalCacheDir() would return.
-    return new File[] { getExternalCacheDir() };
+    return Environment.buildExternalStorageAppCacheDirs(realContextImpl.getPackageName());
   }
 
   @Implementation(maxSdk = JELLY_BEAN_MR2)

@@ -81,6 +81,7 @@ public class ShadowContextTest {
     assertThat(context.getCacheDir().exists()).isTrue();
   }
 
+  @Config(minSdk = KITKAT)
   @Test
   public void getExternalCacheDir_shouldCreateDirectory() throws Exception {
     assertThat(context.getExternalCacheDir().exists()).isTrue();
@@ -102,6 +103,7 @@ public class ShadowContextTest {
     assertThat(cacheTest.exists()).isTrue();
   }
 
+  @Config(minSdk = KITKAT)
   @Test
   public void shouldWriteToExternalCacheDir() throws Exception {
     assertThat(context.getExternalCacheDir()).isNotNull();
